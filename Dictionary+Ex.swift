@@ -14,5 +14,7 @@ func += <K, V> (lhs: inout [K: V], rhs: [K: V]) {
 }
 
 func + (_ lhs: [String: Any], _ rhs: [String: Any]) -> [String: Any] {
-    return [rhs].reduce(lhs, +)
+    var temp = lhs
+    temp += rhs
+    return temp
 }
