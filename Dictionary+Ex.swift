@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - Combine two dictionary
+
+/* or just use reduce 😄
+ let d1: [String: Any] = [:]
+ let d2: [String: Any] = [:]
+ let d3 = [d1, d2].reduce([:], +)
+ */
+
 func += <K, V> (lhs: inout [K: V], rhs: [K: V]) {
     for (k, v) in rhs {
         lhs[k] = v
