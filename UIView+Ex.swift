@@ -218,6 +218,18 @@ extension UIView {
             v.loopDescendantViews(nameOfView, shouldReturn: shouldReturn, execute: execute)
         }
     }
+    
+    /// get all descendant view with specific name
+    ///
+    /// - Parameter nameIfView: the view name
+    /// - Returns: the results
+    func getDescendantViews(_ nameOfView: String) -> [UIView] {
+        var views: [UIView] = []
+        loopDescendantViews(nameOfView, shouldReturn: false, execute: {
+            views.append($0)
+        })
+        return views
+    }
 
     func isEqualToNameOfClass(_ name: String) -> Bool {
         return String(describing: classForCoder) == name
