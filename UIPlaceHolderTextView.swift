@@ -68,7 +68,7 @@ class UIPlaceholderTextView : UITextView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NotificationCenter.default.addObserver(self, selector: #selector(textChanged(_:)), name: NSNotification.Name.UITextViewTextDidChange, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textChanged(_:)), name: UITextView.textDidChangeNotification, object: self)
         setNeedsDisplay()
     }
 
@@ -76,10 +76,10 @@ class UIPlaceholderTextView : UITextView {
         if (text! == "" && placeholder != nil) {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = textAlignment
-            let attributes: [NSAttributedStringKey : Any] = [
-                NSAttributedStringKey.font : UIFont.italicSystemFont(ofSize: font!.pointSize),
-                NSAttributedStringKey.foregroundColor : placeholderColor,
-                NSAttributedStringKey.paragraphStyle  : paragraphStyle]
+            let attributes: [NSAttributedString.Key : Any] = [
+                NSAttributedString.Key.font : UIFont.italicSystemFont(ofSize: font!.pointSize),
+                NSAttributedString.Key.foregroundColor : placeholderColor,
+                NSAttributedString.Key.paragraphStyle  : paragraphStyle]
 
             placeholder?.draw(in: placeholderRectForBounds(bounds: bounds), withAttributes: attributes)
         }
@@ -102,11 +102,16 @@ class UIPlaceholderTextView : UITextView {
         let w = frame.size.width - left - right - 16.0
         let h = frame.size.height - top - bottom - 16.0
 
-        if let style = self.typingAttributes[NSAttributedStringKey.paragraphStyle.rawValue] as? NSParagraphStyle {
+        if let style = convertFromNSAttributedStringKeyDictionary(self.typingAttributes)[NSAttributedString.Key.paragraphStyle.rawValue] as? NSParagraphStyle {
             x += style.headIndent
             y += style.firstLineHeadIndent
         }
 
         return CGRect(x: x, y: y, width: w, height: h)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKeyDictionary(_ input: [NSAttributedString.Key: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }

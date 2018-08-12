@@ -19,11 +19,11 @@ extension UITableView {
 
 extension UITableView {
 
-    func reloadData(with animation: UITableViewRowAnimation) {
+    func reloadData(with animation: UITableView.RowAnimation) {
         reloadSections(IndexSet(integersIn: 0 ..< numberOfSections), with: animation)
     }
 
-    func reloadVisibleRows(with animation: UITableViewRowAnimation = .none) {
+    func reloadVisibleRows(with animation: UITableView.RowAnimation = .none) {
         
         guard let ips = indexPathsForVisibleRows else { return }
 

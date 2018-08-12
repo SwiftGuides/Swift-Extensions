@@ -103,23 +103,23 @@ extension UICollectionView {
     func registerHeaderViewNib(_ header: Swift.AnyClass) {
         let id = String(describing: header.self)
         let nib = UINib(nibName: id, bundle: nil)
-        register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: id)
+        register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: id)
     }
 
     func registerFooterViewNib(_ footer: Swift.AnyClass) {
         let id = String(describing: footer.self)
         let nib = UINib(nibName: id, bundle: nil)
-        register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: id)
+        register(nib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: id)
     }
 
     func dequeueReusableHeader<T : UIView>(with view: T.Type, for indexPath: IndexPath) -> T {
         let id = String(describing: view.self)
-        return dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: id, for: indexPath) as! T
+        return dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: id, for: indexPath) as! T
     }
 
     func dequeueReusableFooter<T : UIView>(with view: T.Type, for indexPath: IndexPath) -> T {
         let id = String(describing: view.self)
-        return dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: id, for: indexPath) as! T
+        return dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: id, for: indexPath) as! T
     }
 }
 
@@ -136,7 +136,7 @@ extension UIView {
     /// - parameter options: options
     ///
     /// - returns: view
-    class func loadFromNibAndClass<T : UIView>(_ view: T.Type, owner: Any? = nil, options: [AnyHashable : Any]? = nil) -> T? {
+    class func loadFromNibAndClass<T : UIView>(_ view: T.Type, owner: Any? = nil, options: [UINib.OptionsKey : Any]? = nil) -> T? {
         
         let name = String(describing: view.self)
         

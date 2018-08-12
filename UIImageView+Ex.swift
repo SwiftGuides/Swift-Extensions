@@ -9,7 +9,7 @@ import UIKit
 
 extension UIImageView {
 
-    var renderingMode: UIImageRenderingMode {
+    var renderingMode: UIImage.RenderingMode {
         get {
             return image?.renderingMode ?? .automatic
         }
@@ -33,8 +33,8 @@ extension UIImageView {
         if animated {
             let transition = CATransition()
             transition.duration = duration
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            transition.type = kCATransitionFade
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.fade
             layer.add(transition, forKey: nil)
         }
 
@@ -55,8 +55,8 @@ extension UIImageView {
         if animation {
             let transition = CATransition()
             transition.duration = duration
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            transition.type = kCATransitionFade
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.fade
             layer.add(transition, forKey: nil)
         }
 

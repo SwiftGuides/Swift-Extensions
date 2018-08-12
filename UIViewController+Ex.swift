@@ -65,10 +65,10 @@ extension UIViewController {
 
 extension UIViewController {
     func keyboardWillChangeFrameNotification(_ notification: Notification, scrollBottomConstant: NSLayoutConstraint) {
-        let duration = (notification as NSNotification).userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-        let curve = (notification as NSNotification).userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        let keyboardBeginFrame = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let keyboardEndFrame = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (notification as NSNotification).userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber
+        let curve = (notification as NSNotification).userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber
+        let keyboardBeginFrame = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let keyboardEndFrame = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         let screenHeight = UIScreen.main.bounds.height
         let isBeginOrEnd = keyboardBeginFrame.origin.y == screenHeight || keyboardEndFrame.origin.y == screenHeight
@@ -89,7 +89,7 @@ extension UIViewController {
         
         UIView.animate(withDuration: duration.doubleValue,
             delay: 0,
-            options: UIViewAnimationOptions(rawValue: UInt(curve.intValue << 16)),
+            options: UIView.AnimationOptions(rawValue: UInt(curve.intValue << 16)),
             animations: { () in
                 scrollBottomConstant.constant = scrollBottomConstant.constant + heightOffset
                 self.view.layoutIfNeeded()

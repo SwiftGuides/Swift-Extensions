@@ -265,8 +265,8 @@ extension UIView: CAAnimationDelegate {
         rotationAnimation.duration              = animated ? duration! : 0
         rotationAnimation.repeatCount           = 0
         rotationAnimation.delegate              = self
-        rotationAnimation.timingFunction        = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        rotationAnimation.fillMode              = kCAFillModeForwards
+        rotationAnimation.timingFunction        = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        rotationAnimation.fillMode              = CAMediaTimingFillMode.forwards
         rotationAnimation.isRemovedOnCompletion = false
 
         layer.add(rotationAnimation, forKey: "rotationAnimation")
