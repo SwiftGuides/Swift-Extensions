@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+@available(iOS, deprecated, message: "please use: allCases instead")
 func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
     var i = 0
     return AnyIterator {
